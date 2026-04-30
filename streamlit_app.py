@@ -134,9 +134,7 @@ Output Requirements:
             data["para_3"] = chatbot_response[2]
     except KeyError:
         st.write("Chatbot response failed")
-    
-    else:
-        sys.exit("Chatbot did not give 3 paragraphs.")
+        
     data.pop("section_1_sentiment")
     data.pop("section_2_sentiment")
     data.pop("section_3_sentiment")
