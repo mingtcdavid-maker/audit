@@ -128,12 +128,13 @@ Output Requirements:
                         )
     try:
         chatbot_response = response.json()["choices"][0]["message"]["content"].split("\n\n")
+        if len(chatbot_response) == 3:
+            data["para_1"] = chatbot_response[0]
+            data["para_2"] = chatbot_response[1]
+            data["para_3"] = chatbot_response[2]
     except KeyError:
         st.write("Chatbot response failed")
-    if len(chatbot_response) == 3:
-        data["para_1"] = chatbot_response[0]
-        data["para_2"] = chatbot_response[1]
-        data["para_3"] = chatbot_response[2]
+    
     else:
         sys.exit("Chatbot did not give 3 paragraphs.")
     data.pop("section_1_sentiment")
