@@ -137,7 +137,8 @@ Output Requirements:
         data["para_1"] = "No chatbot output"
         data["para_2"] = ""
         data["para_3"] = ""
-        
+    st.write(response.status_code)
+    st.write(response.json())
     data.pop("section_1_sentiment")
     data.pop("section_2_sentiment")
     data.pop("section_3_sentiment")
