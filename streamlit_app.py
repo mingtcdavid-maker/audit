@@ -132,13 +132,16 @@ Output Requirements:
             data["para_1"] = chatbot_response[0]
             data["para_2"] = chatbot_response[1]
             data["para_3"] = chatbot_response[2]
+        else:
+            data["para_1"] = "No chatbot output (error, 3 paragraphs not generated)"
+            data["para_2"] = "No chatbot output"
+            data["para_3"] = "No chatbot output"
     except KeyError:
         st.write("Chatbot response failed")
-        data["para_1"] = "No chatbot output"
+        data["para_1"] = "No chatbot output (error, API call fail)"
         data["para_2"] = ""
         data["para_3"] = ""
-    st.write(response.status_code)
-    st.write(response.json())
+
     data.pop("section_1_sentiment")
     data.pop("section_2_sentiment")
     data.pop("section_3_sentiment")
@@ -156,9 +159,12 @@ def create_doc(data):
     document = DocxTemplate("CERT Audit Report Template.docx")
     replace_text(data, document)
 
-
-    document.save(f"CERT Audit Report {data['address']}.docx")
-
+    with open("CERT Audit Report Template.docx", "rb") as f:
+        st.download_button(
+            data=f,
+            file_name=f"CERT Audit Report {data['address']}.docx",
+            mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        )
 def replace_text(data, document):
 
     context = {
