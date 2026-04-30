@@ -37,7 +37,7 @@ def compiledata():
     if submit:
         st.success("Generation Complete.")
         st.session_state.status = True
-        st.write("Please download the file.")
+        st.write("Wait around 1-2 mins while the report generates before a download button will appear.")
 
 
 
