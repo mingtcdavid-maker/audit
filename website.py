@@ -29,7 +29,10 @@ def compiledata():
         overall_audit_grade = st.selectbox("Please state the final audit grade", ["Pass with commendation", "Pass", "Conditional Pass", "Fail"])
 
 
-        submit = st.form_submit_button("Generate CERT Audit Report")
+        submit = st.form_submit_button(
+            label="Generate CERT Audit Report",
+            
+            )
 
 
     if submit:
