@@ -117,7 +117,7 @@ Output Requirements:
 
     response = requests.post(
                     url = "https://openrouter.ai/api/v1/chat/completions",
-                    headers = {"Authorization": "Bearer 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"},
+                    headers = {"Authorization": st.secrets["OPENROUTER_KEY"]},
                     json = {"model": "openai/gpt-5.2",
                             "messages": [
                                 {"role": "system", "content": system_prompt},
