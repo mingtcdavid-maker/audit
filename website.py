@@ -31,13 +31,13 @@ def compiledata():
 
         submit = st.form_submit_button(
             label="Generate CERT Audit Report",
-            
             )
 
 
     if submit:
         st.success("Generation Complete.")
-        st.write("Check your file for completed report.")
+        st.session_state.status = True
+        st.write("Please download the file.")
 
 
 
@@ -67,3 +67,4 @@ def compiledata():
         "auditor":auditor
     }
     return data
+

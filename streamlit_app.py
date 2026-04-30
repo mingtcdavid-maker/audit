@@ -8,9 +8,10 @@ import streamlit as st
 from website import compiledata
 
 def main():
-    if "submitted" not in st.session_state:
-        data = compiledata()
-    else:
+    if "status" not in st.session_state:
+        st.session_state.status = False
+    data = compiledata()
+    if st.session_state.status:
         parsed_data = parsedata(data)
         create_doc(parsed_data)
 
