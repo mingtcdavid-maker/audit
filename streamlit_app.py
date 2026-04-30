@@ -161,6 +161,7 @@ def create_doc(data):
 
     with open("CERT Audit Report Template.docx", "rb") as f:
         st.download_button(
+            label="Download File",
             data=f,
             file_name=f"CERT Audit Report {data['address']}.docx",
             mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
