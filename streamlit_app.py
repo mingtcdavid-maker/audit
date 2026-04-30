@@ -134,6 +134,9 @@ Output Requirements:
             data["para_3"] = chatbot_response[2]
     except KeyError:
         st.write("Chatbot response failed")
+        data["para_1"] = "No chatbot output"
+        data["para_2"] = ""
+        data["para_3"] = ""
         
     data.pop("section_1_sentiment")
     data.pop("section_2_sentiment")
