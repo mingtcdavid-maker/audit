@@ -4,6 +4,7 @@ from docx.shared import Pt
 import requests
 import sys
 import json
+import streamlit as st
 from website import compiledata
 
 def main():
@@ -125,8 +126,10 @@ Output Requirements:
                                 ]
                             }
                         )
-
-    chatbot_response = response.json()["choices"][0]["message"]["content"].split("\n\n")
+    try:
+        chatbot_response = response.json()["choices"][0]["message"]["content"].split("\n\n")
+    except KeyError:
+        st.write("Chatbot response failed")
     if len(chatbot_response) == 3:
         data["para_1"] = chatbot_response[0]
         data["para_2"] = chatbot_response[1]
