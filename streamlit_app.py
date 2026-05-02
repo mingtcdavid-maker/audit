@@ -159,15 +159,17 @@ Output Requirements:
 # only section 1 will generate a response, can improve
 
 def create_doc(data):
+    filename = f"CERT Audit Report {data['address']}.docx"
     document = DocxTemplate("CERT Audit Report Template.docx")
     replace_text(data, document)
-
-    st.download_button(
-        label="Download File",
-        data=document,
-        file_name=f"CERT Audit Report {data['address']}.docx",
-        mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-    )
+    document.save(filename)
+    with open(filename, "rb") as f:
+        st.download_button(
+            label="Download File",
+            data=f,
+            file_name=filename,
+            mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        )
 
 
 def replace_text(data, document):
