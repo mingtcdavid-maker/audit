@@ -5,8 +5,8 @@ def compiledata():
     st.title("CERT AUDIT REPORT GENERATOR")
     with st.form("registration_form"):
         #creates the form
-        date_of_audit = st.text_input("What day was the audit conducted? (I.e 20/05/2025)")
-        time_of_audit = st.text_input("What time was the audit conducted? (I.e 2200 Hrs)")
+        date_of_audit = st.date_input("What day was the audit conducted? (I.e 20/05/2025)")
+        time_of_audit = st.time_input("What time was the audit conducted? (I.e 2200 Hrs)")
         address = st.text_input("What is the name, address and postal code of the premise? (I.e Tampines Primary School, 250, Tampines St 12, Singapore 529426)")
         hp_num = st.text_input("Telephone no of auditor? (I.e 88881234)")
         auditor = st.text_input("Please input your rank and name. (IE SGT2 Zhou Yang): ")
