@@ -14,6 +14,7 @@ def main():
     if st.session_state.status:
         parsed_data = parsedata(data)
         create_doc(parsed_data)
+        log(parsed_data)
 
 
 
@@ -145,12 +146,7 @@ Output Requirements:
         data["para_2"] = ""
         data["para_3"] = ""
 
-    data.pop("section_1_sentiment")
-    data.pop("section_2_sentiment")
-    data.pop("section_3_sentiment")
-    data.pop("section_1_errors")
-    data.pop("section_2_errors")
-    data.pop("section_3_errors")
+
 
     return data
 
@@ -201,7 +197,12 @@ def replace_text(data, document):
 
 
 
+def log(data):
+    with open("logs.txt", "a") as f:
+        f.write(f"Chatbot Response: {data["para_1"]} {data["para_2"]} {data["para_3"]}")
+        f.write(f"User input: {data["section_1_errors"]} {data["section_2_errors"]} {data["section_3_errors"]}")
+        
+
 
 if __name__ == "__main__":
     main()
-
