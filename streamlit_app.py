@@ -6,20 +6,21 @@ import sys
 import json
 import streamlit as st
 from website import compiledata
+import logging
 
 def main():
+    logger = log()
     if "status" not in st.session_state:
         st.session_state.status = False
-    data = compiledata()
+    data = compiledata(logger)
     if st.session_state.status:
-        parsed_data = parsedata(data)
-        create_doc(parsed_data)
-        log(parsed_data)
+        parsed_data = parsedata(data, logger)
+        create_doc(parsed_data, logger)
 
 
 
 
-def parsedata(data):
+def parsedata(data, logger):
     system_prompt = """You are an SCDF officer writing a formal report detailing the results of a CERT (Company Emergency Rescue Team) audit.
 
 General Instructions:
@@ -136,15 +137,18 @@ Output Requirements:
             data["para_1"] = chatbot_response[0]
             data["para_2"] = chatbot_response[1]
             data["para_3"] = chatbot_response[2]
+            logger.debug(f"chatbot response successfull with reply {data['para_1']} \n {data['para_2']} \n {data['para_1']}")
         else:
             data["para_1"] = "No chatbot output (error, 3 paragraphs not generated)"
             data["para_2"] = "No chatbot output"
             data["para_3"] = "No chatbot output"
+            logger.error("chatbot did not respond with paragraph length 3")
     except KeyError:
         st.write("Chatbot response failed")
         data["para_1"] = "No chatbot output (error, API call fail)"
         data["para_2"] = ""
         data["para_3"] = ""
+        logger.critical("Chatbot API call failure")
 
 
 
@@ -154,7 +158,7 @@ Output Requirements:
 
 # only section 1 will generate a response, can improve
 
-def create_doc(data):
+def create_doc(data, logger):
     filename = f"CERT Audit Report {data['address']}.docx"
     document = DocxTemplate("CERT Audit Report Template.docx")
     replace_text(data, document)
@@ -166,6 +170,7 @@ def create_doc(data):
             file_name=filename,
             mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
         )
+    logger.info("User downloaded file")
 
 
 def replace_text(data, document):
@@ -194,14 +199,15 @@ def replace_text(data, document):
     document.render(context)
 
 
-
-
-
-def log(data):
-    with open("logs.txt", "a") as f:
-        f.write(f"Chatbot Response: {data['para_1']} \n {data['para_2']} \n {data['para_3']}")
-        f.write(f"User input pertaining chatbot: 1: {data['section_1_errors']} \n 2: {data['section_2_errors']} \n 3: {data['section_3_errors']}")
-        f.write(f"Other input: {data}")
+def log():
+    logger = logging.getLogger(__name__)
+    logging.basicConfig(
+        filename="app.log",
+        level=logging.INFO,
+        format="%(asctime)s - %(levelname)s - %(message)s"
+    )
+    return logger
+    
 
 
 if __name__ == "__main__":

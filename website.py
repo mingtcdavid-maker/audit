@@ -1,7 +1,7 @@
 import streamlit as st
+import logging
 
-
-def compiledata():
+def compiledata(logger):
     st.title("CERT AUDIT REPORT GENERATOR")
     with st.form("registration_form"):
         #creates the form
@@ -38,6 +38,7 @@ def compiledata():
         st.success("Generation Complete.")
         st.session_state.status = True
         st.write("Wait around 1-2 mins while the report generates before a download button will appear.")
+        logger.info("user submitted info")
 
 
 
@@ -66,5 +67,6 @@ def compiledata():
         "overall_audit_grade":overall_audit_grade,
         "auditor":auditor
     }
+    logger.debug(data)
     return data
 
