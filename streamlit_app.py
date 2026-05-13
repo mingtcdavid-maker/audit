@@ -4,6 +4,7 @@ from docx.shared import Pt
 import requests
 import sys
 import json
+from datetime import datetime, date
 import streamlit as st
 from website import compiledata
 import logging
@@ -138,17 +139,22 @@ Output Requirements:
             data["para_2"] = chatbot_response[1]
             data["para_3"] = chatbot_response[2]
             logger.info(f"chatbot response successfull with reply {data['para_1']} \n {data['para_2']} \n {data['para_1']}")
+            print(datetime.now(), "Info Chatbot Response successful")
+            print(datetime.now(), f"Finish reason: {response.json()['choices'][0]['finish_reason']}")
+            print(datetime.now(). chatbot_response)
         else:
             data["para_1"] = "No chatbot output (error, 3 paragraphs not generated)"
             data["para_2"] = "No chatbot output"
             data["para_3"] = "No chatbot output"
             logger.error("chatbot did not respond with paragraph length 3")
+            print(datetime.now(), "Error Chatbot response paragrapgh length not 3")
     except KeyError:
         st.write("Chatbot response failed")
         data["para_1"] = "No chatbot output (error, API call fail)"
         data["para_2"] = ""
         data["para_3"] = ""
         logger.critical("Chatbot API call failure")
+        print(datetime.now(), "Critical API call failure")
 
 
 
@@ -171,6 +177,7 @@ def create_doc(data, logger):
             mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
         )
     logger.info("User downloaded file")
+    print(datetime.now(), "User downloaded file")
 
 
 def replace_text(data, document):
