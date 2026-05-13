@@ -199,8 +199,8 @@ def replace_text(data, document):
 
 def log(data):
     with open("logs.txt", "a") as f:
-        f.write(f"Chatbot Response: {data["para_1"]} {data["para_2"]} {data["para_3"]}")
-        f.write(f"User input: {data["section_1_errors"]} {data["section_2_errors"]} {data["section_3_errors"]}")
+        f.write(f"Chatbot Response: {data['para_1']} {data['para_2']} {data['para_3']}")
+        f.write(f"User input: {data['section_1_errors']} {data['section_2_errors']} {data['section_3_errors']}")
         
 
 
