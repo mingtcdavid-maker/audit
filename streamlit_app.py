@@ -137,7 +137,7 @@ Output Requirements:
             data["para_1"] = chatbot_response[0]
             data["para_2"] = chatbot_response[1]
             data["para_3"] = chatbot_response[2]
-            logger.debug(f"chatbot response successfull with reply {data['para_1']} \n {data['para_2']} \n {data['para_1']}")
+            logger.info(f"chatbot response successfull with reply {data['para_1']} \n {data['para_2']} \n {data['para_1']}")
         else:
             data["para_1"] = "No chatbot output (error, 3 paragraphs not generated)"
             data["para_2"] = "No chatbot output"
