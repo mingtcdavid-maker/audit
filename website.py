@@ -1,7 +1,10 @@
 import streamlit as st
 import logging
 
-def compiledata(logger):
+logger = logging.getLogger(__name__)
+
+
+def compiledata():
     st.title("CERT AUDIT REPORT GENERATOR")
     with st.form("registration_form"):
         #creates the form

@@ -12,7 +12,7 @@ def main():
     logger = log()
     if "status" not in st.session_state:
         st.session_state.status = False
-    data = compiledata(logger)
+    data = compiledata()
     if st.session_state.status:
         parsed_data = parsedata(data, logger)
         create_doc(parsed_data, logger)
