@@ -77,5 +77,6 @@ def compiledata():
         "auditor":auditor
     }
     logger.debug(data)
+    print("Info, user input", data)
     return data
 
