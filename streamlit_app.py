@@ -139,9 +139,9 @@ Output Requirements:
             data["para_2"] = chatbot_response[1]
             data["para_3"] = chatbot_response[2]
             logger.info(f"chatbot response successfull with reply {data['para_1']} \n {data['para_2']} \n {data['para_1']}")
-            print(datetime.now(), "Info Chatbot Response successful")
-            print(datetime.now(), f"Finish reason: {response.json()['choices'][0]['finish_reason']}")
-            print(datetime.now(), chatbot_response)
+            print(datetime.now(), "Info Chatbot Response successful", flush = True)
+            print(datetime.now(), f"Finish reason: {response.json()['choices'][0]['finish_reason']}", flush = True)
+            print(datetime.now(), chatbot_response, flush = True)
         else:
             data["para_1"] = "No chatbot output (error, 3 paragraphs not generated)"
             data["para_2"] = "No chatbot output"
@@ -154,7 +154,7 @@ Output Requirements:
         data["para_2"] = ""
         data["para_3"] = ""
         logger.critical("Chatbot API call failure")
-        print(datetime.now(), "Critical API call failure")
+        print(datetime.now(), "Critical API call failure", flush = True)
 
 
 
@@ -177,7 +177,7 @@ def create_doc(data, logger):
             mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
         )
     logger.info("User downloaded file")
-    print(datetime.now(), "User downloaded file")
+    print(datetime.now(), "User downloaded file", flush = True)
 
 
 def replace_text(data, document):

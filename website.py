@@ -47,7 +47,7 @@ def compiledata():
         st.session_state.status = True
         st.write("Wait around 1-2 mins while the report generates before a download button will appear.")
         logger.info("user submitted info")
-        print(datetime.now(), "Info User generated file")
+        print(datetime.now(), "Info User generated file", flush = True)
 
 
 
